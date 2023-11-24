@@ -1,0 +1,13 @@
+.item-detail{
+    animation: scaleIn 1s;
+    transition: all 1s cubic-bezier(0, 0, .58, 1);
+}
+
+@keyframes scaleIn {
+    from{
+        scale: 0.2;
+    }
+    to{
+        scale: 1;
+    }
+}

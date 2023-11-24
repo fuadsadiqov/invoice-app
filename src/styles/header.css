@@ -1,0 +1,24 @@
+.select.dark button span{
+    color: white;
+}
+.select.light button span{
+    color: rgb(30 33 57);
+}
+.select.dark ul{
+    --tw-bg-opacity: 1;
+    --tw-border-opacity: 1;
+    background-color: rgb(30 33 57);
+    border-color: rgb(97 97 97);
+}
+.select.light ul{
+    --tw-bg-opacity: 1;
+    --tw-border-opacity: 1;
+    background-color: rgb(249 249 251);
+    border-color: rgb(224 224 224);
+}
+.select.dark ul li:focus{
+    background-color: #fff;
+}
+.select.light ul li:focus{
+    background-color: #fff;
+}

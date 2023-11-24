@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;500;600;700&display=swap');
+body {
+  margin: 0;
+  font-family: 'League Spartan', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.iconsWithHover{
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.iconsWithHover:hover{
+  fill: #7b5cfa;
+}
+.status{
+  padding: 0.5rem 1rem;
+}
+.status.paid{
+  color: #33d7a0;
+  background-color: #33d7a033;
+}
+.status.pending{
+  color: #ff9100;
+  background-color: #ff910033;
+}
+.status.draft{
+  color: #FFFFFF;
+  background-color: #999993;
+}
