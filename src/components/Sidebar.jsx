@@ -16,7 +16,7 @@ export default function Sidebar() {
     });
   };
   return (
-    <div className="bg-primary flex flex-col justify-between rounded-r-xl h-[100svh] z-[10000]">
+    <div className="bg-primary flex flex-col justify-between rounded-r-xl min-h-[100vh] z-[10000]">
       <IconContext.Provider value={{ size: 30, color: "white" }}>
         <div className="md:px-5 px-2 py-2 bg-purple-700 rounded-r-xl">
           <SiReactquery />

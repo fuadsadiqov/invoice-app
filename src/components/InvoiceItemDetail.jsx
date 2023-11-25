@@ -6,6 +6,9 @@ import DrawerComponent from "./Drawer";
 import { Drawer } from "@material-tailwind/react";
 import "../styles/invoiceItemDetail.css";
 import { deleteInvoice, getInvoices, postInvoice } from "../helpers/fetchData";
+import { MdOutlineEdit, MdDeleteOutline, MdDone } from "react-icons/md";
+import { CiClock1 } from "react-icons/ci";
+import { RiDraftLine } from "react-icons/ri";
 
 export default function InvoiceItemDetail() {
   const { id } = useParams();
@@ -36,10 +39,10 @@ export default function InvoiceItemDetail() {
   if (item) {
     return (
       <div className="flex justify-center w-full">
-        <div className="text-white item-detail pt-[100px] w-full flex flex-col gap-5 max-w-screen-md px-5 mx-auto">
+        <div className="text-white item-detail md:pt-[100px] pt-5 w-full flex flex-col gap-5 max-w-screen-md md:px-5 px-2 mx-auto">
           <div
             onClick={() => navigate(-1)}
-            className="back flex h-max items-center gap-2 cursor-pointer mb-4"
+            className="back flex h-max items-center gap-2 cursor-pointer md:mb-4 mb-0"
           >
             <FiChevronLeft className="text-purple-500" />
             <span
@@ -51,48 +54,52 @@ export default function InvoiceItemDetail() {
             </span>
           </div>
           <div
-            className={`flex justify-between ${
+            className={`flex justify-between gap-1 ${
               dark ? "bg-primary text-white" : "bg-white text-primary"
             } py-6 px-7 rounded-md`}
           >
             <div className="flex items-center gap-2">
               <span className="text-xl font-medium">Status</span>
               <ul
-                className={`status w-24 flex items-center gap-2 justify-center rounded-lg capitalize 
+                className={`status md:w-24 w-full  flex items-center gap-2 justify-center rounded-lg capitalize 
                 ${item.status == 1 ? "paid" : ""} 
                 ${item.status == 2 ? "pending" : ""} 
                 ${item.status == 3 ? "draft" : ""}`}
                     >
-                <li className="list-disc ml-2">
+                <li className="list-disc md:flex hidden ml-2">
                   {item.status == 1 ? "paid" : ""}
                   {item.status == 2 ? "pending" : ""}
                   {item.status == 3 ? "draft" : ""}
                 </li>
+                {item.status === 1 ? <MdDone className="md:hidden flex" /> : (item.status === 2 ? <CiClock1 className="md:hidden flex" /> : <RiDraftLine className="md:hidden flex" />)}
               </ul>
             </div>
             <div className="flex gap-2">
               <button
                 onClick={openDrawer}
-                className={`px-6 py-2 rounded-3xl ${
+                className={`md:px-6 px-3 md:py-2 py-1 rounded-3xl ${
                   dark
                     ? "bg-gray-400 hover:bg-gray-600"
                     : "bg-gray-200 hover:bg-gray-400"
                 } transition-colors`}
               >
-                Edit
+                <span className="md:flex hidden">Edit</span>
+                <MdOutlineEdit className="md:hidden flex" />
               </button>
               <button
                 onClick={removeInvoice}
-                className="px-6 py-2 rounded-3xl text-white bg-red-400 hover:bg-red-500 transition-colors"
+                className="md:px-6 px-3 md:py-2 py-1 rounded-3xl text-white bg-red-400 hover:bg-red-500 transition-colors"
               >
-                Delete
+                <span className="md:flex hidden">Delete</span>
+                <MdDeleteOutline className="md:hidden flex"/>
               </button>
               {item.status != 1 && (
                 <button
                   onClick={markAsPaid}
-                  className="capitalize px-6 py-2 rounded-3xl text-white bg-purple-600 hover:bg-purple-800 transition-colors"
+                  className="capitalize md:px-6 px-3 md:py-2 py-1 rounded-3xl text-white bg-green-700 hover:bg-green-800 transition-colors"
                 >
-                  Mark as paid
+                  <MdDone className="md:hidden flex"/>
+                  <span className="md:flex hidden">Mark as paid</span>
                 </button>
               )}
             </div>
@@ -112,7 +119,7 @@ export default function InvoiceItemDetail() {
               </div>
               <div className="font-light">{item.billFrom.address}</div>
             </div>
-            <div className="flex justify-between">
+            <div className="flex md:flex-row flex-col justify-between">
               <div className="flex gap-8">
                 <div className="flex flex-col gap-2">
                   <div>
@@ -164,14 +171,14 @@ export default function InvoiceItemDetail() {
                     item.itemList.map((itemList, key) => {
                       return (
                         <tr key={key} className="flex justify-between mb-3">
-                          <td className="w-[140px]">{itemList.name}</td>
-                          <td className="w-[140px] text-center">
+                          <td className="md:w-[140px] w-[20px]">{itemList.name}</td>
+                          <td className="md:w-[140px] w-[20px] text-center">
                             {itemList.quantity}
                           </td>
-                          <td className="w-[140px] text-center">
+                          <td className="md:w-[140px] w-[20px] text-center">
                             {itemList.price}
                           </td>
-                          <td className="w-[140px] text-center">
+                          <td className="md:w-[140px] w-[20px] text-center">
                             {itemList.total}
                           </td>
                         </tr>

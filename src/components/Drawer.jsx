@@ -12,6 +12,8 @@ import { v4 as uuidv4 } from "uuid";
 import "../styles/drawer.css";
 import { BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { RiDraftLine } from "react-icons/ri";
+import { MdDone } from "react-icons/md";
 
 export default function DrawerComponent({ invoice, closeDrawer }) {
   const { dark, setReload } = useContext(ThemeContext);
@@ -20,7 +22,7 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
     <div
       className={`${
         dark ? "bg-dark-bg text-light-bg" : "bg-light-bg text-dark-bg"
-      } pl-[100px] pt-10`}
+      } md:pl-[100px] pl-[60px] pt-10`}
     >
       <h2 className="font-bold text-2xl">
         {invoice ? `Edit ${invoice.id}` : "New invoice"}
@@ -89,7 +91,7 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
                 />
                 <ErrorMessage name="billFromAddress" component="div" />
               </div>
-              <div className="flex gap-3 pt-3">
+              <div className="flex md:flex-row flex-col gap-3 pt-3">
                 <div>
                   <label className="text-lg" htmlFor="billFromCity">
                     City
@@ -164,7 +166,7 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
                 />
                 <ErrorMessage name="billToAddress" component="div" />
               </div>
-              <div className="flex gap-3 pt-3">
+              <div className="flex md:flex-row flex-col gap-3 pt-3">
                 <div>
                   <label className="text-lg" htmlFor="billToCity">
                     City
@@ -202,7 +204,7 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
                   <ErrorMessage name="billToCountry" component="div" />
                 </div>
               </div>
-              <div className="flex gap-3 pt-3">
+              <div className="flex md:flex-row flex-col gap-3 pt-3">
                 <div>
                   <label className="text-lg" htmlFor="billToDate">
                     Invoice Date
@@ -315,7 +317,7 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
                         })
                       }
                     >
-                      Add a friend
+                      Add an item
                     </button>
                   </div>
                 )}
@@ -323,7 +325,7 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
               <div
                 className={`${
                   dark ? "bg-dark-bg text-light-bg" : "bg-light-bg text-dark-bg"
-                } flex justify-between absolute left-0 pl-[100px] pr-2  pb-3 pt-5 bottom-0 w-full`}
+                } flex justify-between absolute left-0 md:pl-[100px] pl-[60px] pr-2  pb-3 pt-5 bottom-0 w-full`}
               >
                 <button
                   className={`px-5 py-2 rounded-3xl ${
@@ -339,26 +341,20 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
                   {!invoice && (
                     <button
                     onClick={() => setFieldValue('status', '3')}
-                    className={`px-5 py-2 rounded-3xl ${
-                      dark
-                        ? "bg-gray-600 text-white"
-                        : "bg-gray-500 text-dark-bg"
-                    }`}
+                    className={`px-5 py-2 bg-orange-300 text-white rounded-3xl`}
                     type="submit"
                   >
-                    Save as Draft{" "}
+                    <RiDraftLine className="md:hidden flex"/>
+                    <span className="md:flex hidden">Save as Draft</span>
                   </button>
                   )}
                   <button
                     onClick={() => setFieldValue('status', '2')}
-                    className={`px-5 py-2 rounded-3xl ${
-                      dark
-                        ? "bg-purple-300 text-white"
-                        : "bg-purple-500 text-dark-bg"
-                    }`}
+                    className={`px-5 py-2 bg-green-500 text-white rounded-3xl`}
                     type="submit"
                   >
-                    Save & Send{" "}
+                    <MdDone className="md:hidden flex"/>
+                    <span className="md:flex hidden">Save & Send</span>
                   </button>
                 </div>
               </div>
