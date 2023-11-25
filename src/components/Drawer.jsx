@@ -1,12 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../App";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FieldArray,
-} from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import { postInvoice } from "../helpers/fetchData";
 import { v4 as uuidv4 } from "uuid";
 import "../styles/drawer.css";
@@ -62,16 +56,19 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
               const total = quantity * price;
               values.itemList[index].total = total;
             });
-            let totalPrice = values.itemList?.reduce((acc, item) => acc + item.total, 0);
+            let totalPrice = values.itemList?.reduce(
+              (acc, item) => acc + item.total,
+              0
+            );
             values.totalPrice = totalPrice;
             let body = {
               id: invoice ? invoice.id : newId,
               ...values,
             };
             postInvoice(body, method).then((response) => {
-              if(!invoice){
+              if (!invoice) {
                 closeDrawer();
-                setReload(prevReload => !prevReload);
+                setReload((prevReload) => !prevReload);
               }
             });
           }}
@@ -292,7 +289,10 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
                               className={`w-full ${
                                 dark ? "dark" : "light"
                               } flex-0 border-0`}
-                              value={values.itemList[index].quantity * values.itemList[index].price || 0}
+                              value={
+                                values.itemList[index].quantity *
+                                  values.itemList[index].price || 0
+                              }
                               name={`itemList.${index}.total`}
                             />
                           </label>
@@ -340,20 +340,20 @@ export default function DrawerComponent({ invoice, closeDrawer }) {
                 <div className="flex gap-1">
                   {!invoice && (
                     <button
-                    onClick={() => setFieldValue('status', '3')}
-                    className={`px-5 py-2 bg-orange-300 text-white rounded-3xl`}
-                    type="submit"
-                  >
-                    <RiDraftLine className="md:hidden flex"/>
-                    <span className="md:flex hidden">Save as Draft</span>
-                  </button>
+                      onClick={() => setFieldValue("status", "3")}
+                      className={`px-5 py-2 bg-orange-300 text-white rounded-3xl`}
+                      type="submit"
+                    >
+                      <RiDraftLine className="md:hidden flex" />
+                      <span className="md:flex hidden">Save as Draft</span>
+                    </button>
                   )}
                   <button
-                    onClick={() => setFieldValue('status', '2')}
+                    onClick={() => setFieldValue("status", "2")}
                     className={`px-5 py-2 bg-green-500 text-white rounded-3xl`}
                     type="submit"
                   >
-                    <MdDone className="md:hidden flex"/>
+                    <MdDone className="md:hidden flex" />
                     <span className="md:flex hidden">Save & Send</span>
                   </button>
                 </div>
